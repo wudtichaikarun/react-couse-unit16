@@ -20,7 +20,11 @@ export function loadArticles() {
     [CALL_API]: {
       endpoint: '/api/articles',
       method: 'GET',
-      types: [LOAD_ARTICLES_REQUEST, LOAD_ARTICLES_SUCCESS, LOAD_ARTICLES_FAILURE]
+      types: [
+        LOAD_ARTICLES_REQUEST, 
+        LOAD_ARTICLES_SUCCESS,
+        LOAD_ARTICLES_FAILURE
+      ]
     }
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from 'Actions'
 import styles from './Header.scss'
+import { getIsLoggedIn } from 'Selectors'
 
 const Header = ({ isLoggedIn, logout }) => (
   <header className={styles.header}>
@@ -23,8 +24,6 @@ const Header = ({ isLoggedIn, logout }) => (
 )
 
 export default connect(
-  ({ auth }) => ({
-    isLoggedIn: !!auth.token
-  }),
+  state => ({ isLoggedIn: getIsLoggedIn(state) }),
   { logout }
 )(Header)

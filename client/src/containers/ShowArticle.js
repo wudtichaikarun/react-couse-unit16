@@ -4,6 +4,7 @@ import { compose } from 'recompose'
 import { withRouter } from 'react-router'
 import { loadArticle, deleteArticle } from 'Actions'
 import { Button, Comments, Loading } from 'Components'
+import { getComments, getUsers, getArticle } from 'Selectors'
 import styles from './ShowArticle.scss'
 
 class ShowArticle extends PureComponent {
@@ -40,10 +41,10 @@ class ShowArticle extends PureComponent {
 export default compose(
   withRouter,
   connect(
-    ({ articles: { items }, comments, users }, { match }) => ({
-      article: items[+match.params.id],
-      comments,
-      users
+    (state, props) => ({
+      article: getArticle(state, props),
+      comments: getComments(state) ,
+      users: getUsers(state)
     }),
     (dispatch, { match: { params }, history }) => ({
       loadArticle() {
