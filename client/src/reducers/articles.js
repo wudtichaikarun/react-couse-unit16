@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
           title,
           excerpt,
           content,
-          comment: comments.map( comment => comment.id)
+          comments: comments.map( comment => comment.id)
         }]
       }
     }

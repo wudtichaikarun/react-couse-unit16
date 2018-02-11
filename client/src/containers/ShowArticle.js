@@ -36,9 +36,21 @@ class ShowArticle extends PureComponent {
 export default compose(
   withRouter,
   connect(
-    ({ articles: { items } }, { match }) => ({
-      article: items.find(article => article.id === +match.params.id)
-    }),
+    ({ articles: { items }, comments, users }, { match }) => {
+      const article = items.find(article => article.id === +match.params.id)
+
+      return {
+        article: {
+          ...article,
+          comments: comments
+            .filter(comment => article.comments.includes(comment.id))
+            .map(comment => ({ 
+              ...comment, 
+              user: users.find( user => user.id === comment.user )
+            }))
+        }
+      }
+    },
     (dispatch, { match: { params }, history }) => ({
       loadArticle() {
         dispatch(loadArticle(params.id))
