@@ -11,7 +11,7 @@ import {
 
 const initialState = {
   isLoading: false,
-  items: []
+  items: {}
 }
 
 export default (state = initialState, action) => {
@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
     case CREATE_ARTICLE_REQUEST:
       return {
         isLoading: true,
-        items: []
+        items: {}
       }
     case LOAD_ARTICLES_SUCCESS:
       return {
@@ -29,19 +29,11 @@ export default (state = initialState, action) => {
         items: action.payload.articles
       }
     case LOAD_ARTICLE_SUCCESS:
-    case CREATE_ARTICLE_SUCCESS:{
-      const { id, title, excerpt, content, comments } = action.payload.article
+    case CREATE_ARTICLE_SUCCESS:
       return {
         isLoading: false,
-        items: [{
-          id,
-          title,
-          excerpt,
-          content,
-          comments: comments.map( comment => comment.id)
-        }]
+        items: action.payload.entities.articles
       }
-    }
     case EDIT_ARTICLE: {
       const index = state.findIndex(article => article.id === +action.id)
       const article = state[index]

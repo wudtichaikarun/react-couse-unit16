@@ -10,7 +10,7 @@ import {
   Signin,
   Signup
 } from 'Containers'
-import { configureStore } from 'Lib'
+import { configureStore } from 'Store'
 import DevTools from './DevTools'
 import styles from './App.scss'
 

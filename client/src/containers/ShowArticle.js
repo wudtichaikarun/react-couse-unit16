@@ -41,7 +41,7 @@ export default compose(
   withRouter,
   connect(
     ({ articles: { items }, comments, users }, { match }) => ({
-      article: items.find(article => article.id === +match.params.id),
+      article: items[+match.params.id],
       comments,
       users
     }),
