@@ -1,0 +1,13 @@
+{
+  "name": "core-react",
+  "version": "1.0.0",
+  "repository": "git@github.com:babelcoder-courses/core-react.git",
+  "author": "n_thongjor <n.thongjor@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -k \"npm run --prefix api dev\" \"npm run --prefix client dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0"
+  }
+}
