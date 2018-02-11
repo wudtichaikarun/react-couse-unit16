@@ -12,7 +12,7 @@ class ShowArticle extends PureComponent {
   }
 
   render() {
-    const { article, deleteArticle } = this.props
+    const { article,comments,users, deleteArticle } = this.props
 
     if(article) {
       return (
@@ -24,7 +24,11 @@ class ShowArticle extends PureComponent {
             <Button onClick={deleteArticle}>Delete</Button>
           </div>
           <hr />
-          <Comments comments={article.comments} />
+          <Comments 
+            // createComment={createComent}
+            commentIds={article.comments} 
+            comments={comments} 
+            users={users} />
         </div>
       )
     } else {
@@ -36,21 +40,11 @@ class ShowArticle extends PureComponent {
 export default compose(
   withRouter,
   connect(
-    ({ articles: { items }, comments, users }, { match }) => {
-      const article = items.find(article => article.id === +match.params.id)
-
-      return {
-        article: {
-          ...article,
-          comments: comments
-            .filter(comment => article.comments.includes(comment.id))
-            .map(comment => ({ 
-              ...comment, 
-              user: users.find( user => user.id === comment.user )
-            }))
-        }
-      }
-    },
+    ({ articles: { items }, comments, users }, { match }) => ({
+      article: items.find(article => article.id === +match.params.id),
+      comments,
+      users
+    }),
     (dispatch, { match: { params }, history }) => ({
       loadArticle() {
         dispatch(loadArticle(params.id))
