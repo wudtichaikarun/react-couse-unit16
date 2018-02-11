@@ -29,11 +29,19 @@ export default (state = initialState, action) => {
         items: action.payload.articles
       }
     case LOAD_ARTICLE_SUCCESS:
-    case CREATE_ARTICLE_SUCCESS:
+    case CREATE_ARTICLE_SUCCESS:{
+      const { id, title, excerpt, content, comments } = action.payload.article
       return {
         isLoading: false,
-        items: [action.payload.article]
+        items: [{
+          id,
+          title,
+          excerpt,
+          content,
+          comment: comments.map( comment => comment.id)
+        }]
       }
+    }
     case EDIT_ARTICLE: {
       const index = state.findIndex(article => article.id === +action.id)
       const article = state[index]
