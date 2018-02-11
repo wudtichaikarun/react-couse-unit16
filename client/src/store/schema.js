@@ -7,5 +7,5 @@ export const commentSchema = new schema.Entity('comments', {
 })
 
 export const articleSchema = new schema.Entity('articles', {
-  comemnts: [commentSchema]
+  comments: [commentSchema]
 })

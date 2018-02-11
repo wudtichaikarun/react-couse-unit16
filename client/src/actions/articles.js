@@ -37,7 +37,7 @@ export function loadArticle(id) {
           payload(action, state, res) {
             return res
               .json()
-              .then(json => normalize(json, { article: articleSchema } ))
+              .then(json => normalize(json, { article: articleSchema }))
           }
         },
         LOAD_ARTICLE_FAILURE
