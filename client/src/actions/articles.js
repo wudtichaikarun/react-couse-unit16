@@ -22,7 +22,14 @@ export function loadArticles() {
       method: 'GET',
       types: [
         LOAD_ARTICLES_REQUEST, 
-        LOAD_ARTICLES_SUCCESS,
+        {
+          type: LOAD_ARTICLES_SUCCESS,
+          payload(action, state, res) {
+            return res
+              .json()
+              .then(json => normalize(json, { article: articleSchema }))
+          }
+        },
         LOAD_ARTICLES_FAILURE
       ]
     }

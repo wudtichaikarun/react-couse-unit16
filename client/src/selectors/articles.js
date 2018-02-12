@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 export function getArticle(state, props) {
-  return state.articles.items[+props.match.params.id]
+  return state.articles[+props.match.params.id]
 }
 
 /*
@@ -14,10 +14,6 @@ NEW function use libary
     Memozied selectors
 */
 export const getArticles = createSelector(
-  (state) => state.articles, 
-  (articles) => Object.values(articles.items)
+  state => state.articles,
+  articles => Object.values(articles)
 )
-
-export function getIsArticleLoading(state) {
-  return state.articles.isLoading
-}
