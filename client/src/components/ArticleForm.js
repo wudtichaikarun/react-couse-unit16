@@ -4,21 +4,37 @@ import { Field, reduxForm } from 'redux-form'
 import { Button } from 'Components'
 import styles from './ArticleForm.scss'
 
+const renderField = ({ input, label, type, element, rows}) => (
+<div className={styles.group}>
+  <label>{label}</label>
+  {
+    element === 'input' 
+    ? <input {...input} type={type} placeholder={label}/>
+    : <textarea {...input} rows={rows} placeholder={label} />
+  }
+</div>
+)
+
 const ArticleForm =  ({ header, handleSubmit }) => (
   <form>
     <h2 className={styles.title}>{header}</h2>
-    <div className={styles.group}>
-      <label>Title</label>
-      <Field component='input' type='text' name='title'/>
-    </div>
-    <div className={styles.group}>
-      <label>Excerpt</label>
-      <Field component='textarea' rows={3} name='excerpt'/>
-    </div>
-    <div className={styles.group}>
-      <label>Content</label>
-      <Field component='textarea' rows={5} name='content'/>
-    </div>
+      <Field 
+        component={renderField}
+        element='input'
+        type='text' 
+        name='title' 
+        label='Title' />
+      <Field 
+        component={renderField}
+        element='textarea' 
+        rows={3} 
+        name='excerpt' 
+        label='Excerpt' />
+      <Field 
+        component={renderField}
+        rows={5} 
+        name='content' 
+        label='Content' />
     <div className={styles.button}>
       <Button onClick={handleSubmit}>{header}</Button>
     </div>
