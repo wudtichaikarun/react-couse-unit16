@@ -20,8 +20,9 @@ export default (state = initialState, action) => {
     case LOAD_ARTICLES_SUCCESS:
       return action.payload.result.articles
     case LOAD_ARTICLE_SUCCESS:
-    case CREATE_ARTICLE_SUCCESS:
       return action.payload.entities.articles
+    case CREATE_ARTICLE_SUCCESS:
+      return action.payload.article
     case EDIT_ARTICLE: {
       const index = state.findIndex(article => article.id === +action.id)
       const article = state[index]

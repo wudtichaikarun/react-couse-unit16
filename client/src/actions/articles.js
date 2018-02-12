@@ -14,6 +14,7 @@ import {
 import { CALL_API } from 'redux-api-middleware'
 import { normalize } from 'normalizr'
 import { articleSchema } from 'Store'
+import { getToken } from 'Lib'
 
 export function loadArticles() {
   return {
@@ -64,7 +65,8 @@ export function createArticle(article) {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': getToken()
       },
       body: JSON.stringify(article),
       types: [CREATE_ARTICLE_REQUEST, CREATE_ARTICLE_SUCCESS, CREATE_ARTICLE_FAILURE]

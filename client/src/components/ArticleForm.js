@@ -1,55 +1,35 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { Field, reduxForm } from 'redux-form'
 import { Button } from 'Components'
 import styles from './ArticleForm.scss'
 
-class ArticleForm extends PureComponent {
-  static propTypes = {
-    header: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func.isRequired
-  }
+const ArticleForm =  ({ header, handleSubmit }) => (
+  <form>
+    <h2 className={styles.title}>{header}</h2>
+    <div className={styles.group}>
+      <label>Title</label>
+      <Field component='input' type='text' name='title'/>
+    </div>
+    <div className={styles.group}>
+      <label>Excerpt</label>
+      <Field component='textarea' rows={3} name='excerpt'/>
+    </div>
+    <div className={styles.group}>
+      <label>Content</label>
+      <Field component='textarea' rows={5} name='content'/>
+    </div>
+    <div className={styles.button}>
+      <Button onClick={handleSubmit}>{header}</Button>
+    </div>
+  </form>
+)
 
-  state = {
-    title: '',
-    excerpt: '',
-    content: ''
-  }
-
-  onSubmit = () => {
-    this.props.onSubmit(this.state)
-  }
-
-  onChange = event => {
-    const { name, value } = event.target
-
-    this.setState({ [name]: value })
-  }
-
-  render() {
-    const { header } = this.props
-    const { title, excerpt, content } = this.state
-
-    return (
-      <form>
-        <h2 className={styles.title}>{header}</h2>
-        <div className={styles.group}>
-          <label>Title</label>
-          <input type='text' name='title' onChange={this.onChange} value={title} />
-        </div>
-        <div className={styles.group}>
-          <label>Excerpt</label>
-          <textarea rows={3} name='excerpt' onChange={this.onChange} value={excerpt}  />
-        </div>
-        <div className={styles.group}>
-          <label>Content</label>
-          <textarea rows={5} name='content' onChange={this.onChange} value={content}  />
-        </div>
-        <div className={styles.button}>
-          <Button onClick={this.onSubmit}>{header}</Button>
-        </div>
-      </form>
-    )
-  }
+ArticleForm.propTypes = {
+  header: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
-export default ArticleForm
+export default reduxForm({
+  form: 'article'
+})(ArticleForm) 
