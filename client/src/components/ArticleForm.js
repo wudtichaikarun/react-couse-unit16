@@ -4,15 +4,25 @@ import { Field, reduxForm } from 'redux-form'
 import { Button } from 'Components'
 import styles from './ArticleForm.scss'
 
-const renderField = ({ input, label, type, element, rows}) => (
-<div className={styles.group}>
-  <label>{label}</label>
-  {
-    element === 'input' 
-    ? <input {...input} type={type} placeholder={label}/>
-    : <textarea {...input} rows={rows} placeholder={label} />
-  }
-</div>
+const renderField = ({ 
+  input, 
+  label, 
+  type, 
+  element, 
+  rows, 
+  meta: { touched, error }
+}) => (
+  <div className={styles.group}>
+    <label>{label}</label>
+    {
+      element === 'input' 
+      ? <input {...input} type={type} placeholder={label}/>
+      : <textarea {...input} rows={rows} placeholder={label} />
+    }
+    {
+      touched && error && <div className={styles.error}>{error}</div>
+    }
+  </div>
 )
 
 const ArticleForm =  ({ header, handleSubmit }) => (
