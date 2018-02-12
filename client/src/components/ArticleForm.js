@@ -30,6 +30,17 @@ ArticleForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
+function validate(values) {
+  let errors = {}
+
+  if(!values.title) errors.title = 'Required.'
+  if(!values.excerpt) errors.excerpt = 'Required.'
+  if(!values.content) errors.content = 'Required.'
+
+  return errors
+}
+
 export default reduxForm({
-  form: 'article'
+  form: 'article',
+  validate
 })(ArticleForm) 
