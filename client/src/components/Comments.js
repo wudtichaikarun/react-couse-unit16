@@ -2,40 +2,30 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Comment } from 'Components'
 
-const Comments = ({ commentIds, comments, users }) => (
-  <div>
+const Comments = ({ comments, createComment }) => {
+ console.log("comments is =",comments)
+ return(<div>
     {
-      commentIds.map(id => { 
-        const comment =comments[id]
-        const user = users[comment.user]
+      Object.keys(comments).map(id => {
+        const { message, user } = comments[id]
 
-        return <Comment key={id} message={comment.message} user={user.name} />
+        return <Comment key={id} message={message} user={user.name} />
       })
     }
-  </div>
-)
+  </div>)
+}
 
 Comments.propTypes = {
-  commentIds: PropTypes.arrayOf(
-    PropTypes.number.isRequired
-  ),
   comments: PropTypes.objectOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      user: PropTypes.number.isRequired,
+      user: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired
+      }).isRequired,
       message: PropTypes.string.isRequired
     }).isRequired
-  ),
-  users: PropTypes.objectOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired
-    }).isRequired
   )
-}
-
-Comments.defaultProps = {
-  commentIds: []
 }
 
 export default Comments

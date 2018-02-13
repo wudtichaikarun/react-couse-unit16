@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Comments } from 'Components'
+import { Button } from 'Components'
+import { Comments } from 'Containers'
 import styles from './ShowArticle.scss'
 
 const ShowArticle = ({
   article,
   deleteArticle,
-  createComment,
-  comments,
-  users
+  createComment
 }) => (
   <div>
     <h2>{article.title}</h2>
@@ -20,9 +19,7 @@ const ShowArticle = ({
     <hr />
     <Comments 
       createComment={createComment}
-      commentIds={article.comments} 
-      comments={comments} 
-      users={users} />
+      commentIds={article.comments} />
   </div>
 ) 
 
