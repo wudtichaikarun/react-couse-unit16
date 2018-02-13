@@ -2,35 +2,27 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { withRouter } from 'react-router'
-import { loadArticle, deleteArticle } from 'Actions'
-import { Button, Comments, Loading } from 'Components'
+import { loadArticle, deleteArticle, createComment } from 'Actions'
+import { Loading ,ShowArticle } from 'Components'
 import { getComments, getUsers, getArticle } from 'Selectors'
-import styles from './ShowArticle.scss'
 
-class ShowArticle extends PureComponent {
+
+class ShowArticleContainer extends PureComponent {
   componentDidMount() {
     this.props.loadArticle()
   }
 
   render() {
-    const { article,comments,users, deleteArticle } = this.props
+    const { article,comments,users, deleteArticle, createComment } = this.props
 
     if(article) {
       return (
-        <div>
-          <h2>{article.title}</h2>
-          <p>{article.content}</p>
-          <div className={styles.buttons}>
-            <Button to={`/articles/${article.id}/edit`}>Edit</Button>
-            <Button onClick={deleteArticle}>Delete</Button>
-          </div>
-          <hr />
-          <Comments 
-            // createComment={createComent}
-            commentIds={article.comments} 
-            comments={comments} 
-            users={users} />
-        </div>
+        <ShowArticle
+        article={article}
+        deleteArticle={deleteArticle}
+        createComment={createComment}
+        comments={comments}
+        users={users} />
       )
     } else {
       return <Loading />
@@ -53,7 +45,10 @@ export default compose(
       deleteArticle() {
         dispatch(deleteArticle(params.id))
         history.push('/articles')
+      },
+      createComment(message){
+        dispatch(createComment({ articleId: params.id, message }))
       }
     })
   )
-)(ShowArticle)
+)(ShowArticleContainer)
