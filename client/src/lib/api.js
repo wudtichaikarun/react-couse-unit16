@@ -7,7 +7,7 @@ export default {
   articles: [
     {
       id: 1,
-      title: 'โหลดเว็บเร็วขึ้นไม่ยาก แค่ใช้ PurifyCSS',
+      title: 'Fack api โหลดเว็บเร็วขึ้นไม่ยาก แค่ใช้ PurifyCSS',
       excerpt: 'ใช้ PurifyCSS เพื่อกรองเฉพาะ CSS ที่ใช้งานจริง โดยตัดส่วนที่ไม่ได้ใช้ออกไป เพื่อให้เว็บโหลดเร็วขึ้น',
       content: 'คุณเคยใช้ Twitter Bootstrap หรือไม่? \nเป็นที่ทราบกันดีว่า CSS Framework ไม่ว่าจะเป็น Twitter Bootstrap, Zurb Foundation หรือแม้กระทั่ง Pure CSS ที่ชื่อเหมือนจะผอมบาง แท้จริงแล้วบวมจนอืดเป็นช้างน้ำระยะสุดท้าย \nสมมติโค้ด HTML ของเรามีการเรียกใช้ button โดยใช้ Bootstrap ในการจัดสไตล์ดังนี้',
       comments: [

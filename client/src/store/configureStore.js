@@ -16,6 +16,7 @@ export default function(initialState) {
   const middlewares = [
     setToken,
     apiMiddleware,
+    // redux thunk use for addPromiseTodispatch
     thunk,
     logger
   ]

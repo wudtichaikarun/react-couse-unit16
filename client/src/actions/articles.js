@@ -14,7 +14,17 @@ import {
 import { CALL_API } from 'redux-api-middleware'
 import { normalize } from 'normalizr'
 import { articleSchema } from 'Store'
-import { getToken } from 'Lib'
+
+// // fack api
+// import { api } from 'Lib'
+
+// // Fack api
+// export function loadArticles() {
+//   return {
+//     type: 'LOAD_ARTICLES',
+//     articles: api.articles
+//   }
+// }
 
 export function loadArticles() {
   return {
@@ -28,7 +38,7 @@ export function loadArticles() {
           payload(action, state, res) {
             return res
               .json()
-              .then(json => normalize(json, { article: articleSchema }))
+              .then(json => normalize(json, { articles: [articleSchema] }))
           }
         },
         LOAD_ARTICLES_FAILURE
@@ -65,14 +75,25 @@ export function createArticle(article) {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': getToken()
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(article),
-      types: [CREATE_ARTICLE_REQUEST, CREATE_ARTICLE_SUCCESS, CREATE_ARTICLE_FAILURE]
+      types: [
+        CREATE_ARTICLE_REQUEST,
+        {
+          type: CREATE_ARTICLE_SUCCESS,
+          payload(action, state, res) {
+            return res
+              .json()
+              .then(json => normalize(json, { article: articleSchema }))
+          }
+        },
+        CREATE_ARTICLE_FAILURE
+      ]
     }
   }
 }
+
 
 export function editArticle(id, value) {
   return {

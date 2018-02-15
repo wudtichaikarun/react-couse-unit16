@@ -30,6 +30,6 @@ export const getCommentsByIds = createSelector(
       (result, [k, v]) => ({
         ...result,
         [k]: { ...v, user: users[v.user] }
-      },{})
+      }),{}
     )
 )

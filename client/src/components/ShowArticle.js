@@ -27,13 +27,13 @@ ShowArticle.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired
-  }).isRequired,
-  comments: PropTypes.objectOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      user: PropTypes.number.isRequired,
-      message: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    comments: PropTypes.objectOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        user: PropTypes.number.isRequired,
+        message: PropTypes.string.isRequired
+      }).isRequired
   ).isRequired,
   users: PropTypes.objectOf(
     PropTypes.shape({

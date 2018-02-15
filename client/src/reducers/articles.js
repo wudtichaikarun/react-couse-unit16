@@ -13,16 +13,17 @@ const initialState = []
 
 export default (state = initialState, action) => {
   switch(action.type) {
+    // Fack api
+    // case 'LOAD_ARTICLES':
+    //   return action.articles
     case LOAD_ARTICLES_REQUEST:
     case LOAD_ARTICLE_REQUEST:
     case CREATE_ARTICLE_REQUEST:
       return initialState
     case LOAD_ARTICLES_SUCCESS:
-      return action.payload.result.articles
     case LOAD_ARTICLE_SUCCESS:
-      return action.payload.entities.articles
     case CREATE_ARTICLE_SUCCESS:
-      return action.payload.article
+      return action.payload.entities.articles
     case EDIT_ARTICLE: {
       const index = state.findIndex(article => article.id === +action.id)
       const article = state[index]

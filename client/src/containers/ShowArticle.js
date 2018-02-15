@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { withRouter } from 'react-router'
-import { loadArticle, deleteArticle, createComment } from 'Actions'
+import { loadArticle, deleteArticle } from 'Actions'
 import { Loading ,ShowArticle } from 'Components'
 import { getComments, getUsers, getArticle } from 'Selectors'
 
@@ -13,14 +13,13 @@ class ShowArticleContainer extends PureComponent {
   }
 
   render() {
-    const { article,comments,users, deleteArticle, createComment } = this.props
+    const { article,comments,users, deleteArticle } = this.props
 
     if(article) {
       return (
         <ShowArticle
         article={article}
         deleteArticle={deleteArticle}
-        createComment={createComment}
         comments={comments}
         users={users} />
       )
@@ -45,9 +44,6 @@ export default compose(
       deleteArticle() {
         dispatch(deleteArticle(params.id))
         history.push('/articles')
-      },
-      createComment(message){
-        dispatch(createComment({ articleId: params.id, message }))
       }
     })
   )
